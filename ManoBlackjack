@@ -1,0 +1,13 @@
+public class ManoBlackjack
+{
+   //Nos dice si hay un as en la mano 
+   public boolean hayunAs(){
+       int cartaVal;
+       boolean as;
+       as=false;
+       cartaVal=carta.getValor();
+       if(cartaVal=1)
+        as=true;
+       return as;
+    } 
+}
