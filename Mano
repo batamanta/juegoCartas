@@ -1,53 +1,44 @@
-import java.util.Vector;
-
-public class Mano
-{
-   //Se trata de un vector y no de un array porque el numero de cartas en la mano es variable
-   private Vector mano;
-   //Constructor
+public class Mano{
+   private Carta[] mano;
    public Mano(){
-       mano=new Vector();
+        mano=new Carta[5];
     }
-   //Añade una carta a su mano
-   public void pideCarta(Baraja b){
-       if(b!=null)
-       mano.addElemento(b);
-    }
-   //Cuenta las cartas que tiene la mano
-   public int contar(){
-       return mano.size();
-    }
-   //Nos dice la carta que tiene en la posicion pos
-   public Carta obtenerCarta(int pos){
-       if(pos>=0 && pos<mano.size())
-        return(Carta)mano.elementAt(pos);
-       else
-        return null;
-    }
-   //Cuenta los puntos que suman las cartas de nuestra mano
-   public int calcularValor(){
-       int val;
-       boolean as;
-       int cartas;
-       val=0;
-       as=false;
-       cartas=contar();
-       for(int i=0;i<cartas;i++){
-           Carta carta;
-           int cartaVal;
-           carta=obtenerCarta(i);
-           cartaVal=carta.getValor();
-           if(cartaVal>10){
-               cartaVal=10;
+   public void pideCarta(Carta carta){
+       boolean recibido=false;
+       for(int i=0;i<5;i++){
+            if (mano[i]==null){
+               mano[i]=carta;
             }
-           if(cartaVal==1){
-               as=true;
-            }
-            val=val+cartaVal;
+            recibido =true;
+            break;
         }
+       if(!recibido){
+            System.out.println("-- La mano está llena, no puede recibir más cartas --");
+       }
+    }
+   public Carta obtenerCarta(int pos){
+       if(pos>=0 && pos<=5){
+           return mano[pos];
+        }
+       return null;
+    }
+   public int calculaValor(){
+       int val;
+       val=0;
+       for(int i=0;i<5;i++){
+           Carta carta=obtenerCarta(i);
+           int cartaVal;
+           if(carta!=null){
+               cartaVal=carta.getValor();
+           }
+           if(cartaVal==1){
+                   cartaVal=11;
+           }
+           val=val+cartaVal;        
+        }  
        return val;
     }
-   public void reparte(Baraja b){
+   public void reparte(Baraja baraja){
        baraja[0]=new BarajaFrancesa();
        baraja[1]=new BarajaFrancesa();
        baraja[0].mezclar();
@@ -67,5 +58,5 @@ public class Mano
        else
         sepasa=false;
        return sepasa;
-    }     
+    }  
 }
