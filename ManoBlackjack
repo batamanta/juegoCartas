@@ -10,4 +10,19 @@ public class ManoBlackjack extends Mano
         as=true;
        return as;
     } 
+   public int reduceValor(){
+       if(hayunAs()){
+           int val;
+           val=0;
+           for(int i=0;i<5;i++){
+               Carta carta=obtenerCarta(i);
+               int cartaVal;
+               if(carta!=null){
+                   cartaVal=carta.getValor(); 
+                }
+            val=val+cartaVal;
+        }
+            return val;
+        }
+    }
 }
